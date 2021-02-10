@@ -5,32 +5,82 @@
         <title>Matching Game</title>
     </head>
     <body onload="generateFaces()">
-        <h1> Matching Game </h1>
-        <p>Click on the extra smiling face on the left</p>
+        <header>
         
+                <h1> Matching Game </h1>
+                
+                <p>Click on the extra smiling face on the left</p>
+                <input id="reset" type="button" value="PLAY AGAIN !" onclick="restartGame()" class="center">
+                
+            
+        </header>
 
-        <div id="leftSide"></div>
-        <div id="rightSide"></div>
+        <hr>
+        <section>
+            <div id="leftSide"></div>
+            <div id="rightSide"></div>
+        </section>
+
+        <hr id="bottom">
 
         <style>
-            img { position: absolute;}
-            div {position:absolute;
+            body{
+                background-color:#FFFACD
+            }
+            input{
+                align: center; 
+                color: #000080;
+                font-size: 16px;
+                font-weight: 600;
+
+            }
+            .center{
+               display: flex;
+               justify-content: center;
+               align-items: center;
+
+            }
+            h1{ 
+                text-align:center 
+            }
+            p{ 
+                text-align:center
+            }
+            img { 
+                position: absolute;
+            }
+            div {
+                position:absolute;
                  width: 500px;
                  height: 500px;
+            }
+            hr{
+                padding: 0;
+                margin: 0;
+                width: 992px;
+                color:#0000;
+                height: 3px;
             }
             #rightSide{
                 left: 500px;
                 border-left: 3px solid;
                 border-right: 3px solid;
+                background-color:#FF8C00;
+                border-bottom-color:#0000 ;
             }
             #leftSide{
                 border-left: 3px solid;
+                border-right: 3px solid;
+                background-color:#FF8C00;
+                border-bottom-color:#0000 ;
             }
+             
 
             
         </style>
         <script> 
             let numberOfFaces = 5;
+            let numberOfGames = 0;
             const theLeftSide = document.getElementById("leftSide");
             const theRightSide = document.getElementById("rightSide");
             
@@ -59,6 +109,7 @@
             function nextLevel(){
                 event.stopPropagation();
                 numberOfFaces += 5;
+                numberOfGames += 1;
                 while(theLeftSide.firstChild){
                         theLeftSide.removeChild(theLeftSide.firstChild);
                 }
@@ -72,12 +123,19 @@
             }
 
             function gameOver(){
-                alert("Game Over!!!");
+                alert("Game Over!!!\n You found " + numberOfGames + " faces!");
                 theLeftSide.lastChild.removeEventListener("click", nextLevel);
                 document.body.removeEventListener("click", gameOver)
+            }
+
+            
+            function restartGame(){
+                event.stopPropagation();
+                location.reload(true);
             }
            
                     
         </script>
+        
     </body>
 </html>
